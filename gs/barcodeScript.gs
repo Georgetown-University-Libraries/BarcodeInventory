@@ -18,26 +18,28 @@ Pre-requisites
       &sheetrow=x   row number of the barcode to query
       
     POST          : Returns an array of JSON representations of barcoded items
-      payload       A JSON array of objects with fields barcode and row
+      payload       A JSON array of objects to query (containing fields barcode and row)
                     [
                       {"row": 2, "barcode": "11111111111111"},
                       {"row": 5, "barcode": "22222222222222"}
                     ]
       
     JSON Structure for a barcoded item
-      sheetrow      - the row number passed in with the barcode
-      barcode       - barcode of the item queried 
-      location_code - stack location
-      call_number   - item call number
-      volume        - item volume
-      title         - item title
-      status_code   - item status code
-      due_date      - item due date (if checked out according to Sierra)
-      icode2        - icode2
-      is_suppressed - bib is suppressed in Sierra
-      record_num    - Sierra record number
-      status        - Summary status for the item based on local implementation rules
-      status_msg    - Detailed message explaining the status field
+    {
+      "sheetrow":      "the row number passed in with the barcode",
+      "barcode":       "barcode of the item queried", 
+      "location_code": "stack location",
+      "call_number":   "item call number",
+      "volume":        "item volume",
+      "title":         "item title",
+      "status_code":   "item status code",
+      "due_date":      "item due date (if checked out according to Sierra)",
+      "icode2":        "icode2",
+      "is_suppressed": "bib is suppressed in Sierra",
+      "record_num":    "Sierra record number",
+      "status":        "Summary status for the item based on local implementation rules",
+      "status_msg":     "Detailed message explaining the status field"
+    }
   
 Challenges
 - The process must force new users of a spreadsheet to authorize the services used by the script
