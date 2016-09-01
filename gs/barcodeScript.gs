@@ -14,9 +14,15 @@ Pre-requisites
   
   Web Service Enpoints
     GET           : Returns a single JSON representation of a barcoded item
-      ?barcode=x
+      ?barcode=x    barcode to query
+      &sheetrow=x   row number of the barcode to query
+      
     POST          : Returns an array of JSON representations of barcoded items
       payload       A JSON array of objects with fields barcode and row
+                    [
+                      {"row": 2, "barcode": "11111111111111"},
+                      {"row": 5, "barcode": "22222222222222"}
+                    ]
       
     JSON Structure for a barcoded item
       sheetrow      - the row number passed in with the barcode
