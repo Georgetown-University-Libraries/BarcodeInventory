@@ -12,7 +12,7 @@ Pre-requisites
 - A web service (accessible to Google Servers) that will supply additional data about scanned items from Sierra
   A PHP version of this service is distributed with this repository
   
-  Web Service Enpoints
+  Web Service Endpoints
     GET           : Returns a single JSON representation of a barcoded item
       ?barcode=x    barcode to query
       &sheetrow=x   row number of the barcode to query
