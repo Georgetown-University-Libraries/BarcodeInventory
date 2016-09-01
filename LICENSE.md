@@ -1,6 +1,6 @@
  ------------------------------------------------------------------------
     
-    Copyright (c) 2013, Georgetown University Libraries
+    Copyright (c) 2016, Georgetown University Libraries
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without modification, 
