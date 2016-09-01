@@ -22,7 +22,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 See http://techdocs.iii.com/sierradna/
 
 */
-include '..../Sierra.php';
+//The following path may need to be localized to your instance
+include 'Sierra.php';
 
 $SIERRA = new Sierra();
 
