@@ -1,5 +1,3 @@
- ------------------------------------------------------------------------
-    
     Copyright (c) 2016, Georgetown University Libraries
     All rights reserved.
     
