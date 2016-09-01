@@ -220,11 +220,17 @@ function markValidBarcode(cell) {
 function validBarcode(cell) {
   var val = cell.getValue();
   if (emptyBarcodeVal(val)) {
+    var ssheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ssheet.getActiveSheet();
+    sheet.getRange(cell.getRow(), COL_STATUS).setValue("");
+    sheet.getRange(cell.getRow(), COL_STATUS_MSG).setValue("");
   } else if (validBarcodeVal(val)) {
     return true;
   } else {
-    showColumnVal(cell, COL_STATUS, "FAIL");
-    showColumnVal(cell, COL_STATUS_MSG, "Invalid Barcode");
+    var ssheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ssheet.getActiveSheet();
+    sheet.getRange(cell.getRow(), COL_STATUS).setValue("FAIL");
+    sheet.getRange(cell.getRow(), COL_STATUS_MSG).setValue("Invalid Barcode");
   }
   return false;
 }
