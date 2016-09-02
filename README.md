@@ -1,6 +1,11 @@
 # BarcodeInventory
 Support barcode scanning inventory process using data from Sierra
 
+## Demonstration Video
+This video demonstrates a barcode scanning inventory workflow developed by the Georgetown University Library using Google Sheets.
+
+[![Demonstration Video](https://i.ytimg.com/vi/YiTGvnMrXX8/hqdefault.jpg)](https://youtu.be/YiTGvnMrXX8)
+
 ## Description
 * Access Services student works will scan a shelf of books in order into a Google Sheet containing Google Apps Script code.
 * The Google Sheet has a trigger that marks the new barcode with a comment (onEdit function)
