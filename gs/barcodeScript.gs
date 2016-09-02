@@ -164,7 +164,7 @@ function init() {
 function rerun() {
   Logger.log("Rerun");
   var lock = LockService.getScriptLock();
-  lock.waitLock(30000);
+  lock.tryLock(30000);
   Logger.log("LOCK: "+lock.hasLock());
   updateBatches(makeUpdateBatches(getRerunUpdates()), true);
   lock.releaseLock();
@@ -174,7 +174,7 @@ function rerun() {
 function retry() {
   Logger.log("Retry");
   var lock = LockService.getScriptLock();
-  lock.waitLock(30000);
+  lock.tryLock(30000);
   Logger.log("LOCK: "+lock.hasLock());
   updateBatches(makeUpdateBatches(getRetryUpdates()), true);
   lock.releaseLock();
@@ -211,7 +211,7 @@ function onEdit(e){
 function onChange(){
   Logger.log("On Change "+Utilities.formatDate(new Date(), "GMT", "yyyy-MM-dd'T'HH:mm:ss'Z'"));
   var lock = LockService.getScriptLock();
-  lock.waitLock(5);
+  lock.tryLock(5);
   if (!lock.hasLock()) return;
   updateBatches(makeUpdateBatches(getEditUpdates()), true);
   lock.releaseLock();
