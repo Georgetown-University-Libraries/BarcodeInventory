@@ -162,7 +162,9 @@ function init() {
 
 //Force a rerun of all barcodes in the spreadsheet
 function rerun() {
-  Logger.log("Rerun");
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert('Confirm', 'This option will rerun every barcode in the spreadsheet.  It could take some time to complete.\nAre you sure you want to continue?', ui.ButtonSet.YES_NO); 
+  if (response != ui.Button.YES) return;
   var lock = LockService.getScriptLock();
   lock.tryLock(30000);
   Logger.log("LOCK: "+lock.hasLock());
@@ -184,9 +186,13 @@ function retry() {
 function duplicateSpreadsheet() {
   var formattedDate = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd_HH:mm");
   var ssheet = SpreadsheetApp.getActiveSpreadsheet();
-  var newFile = DriveApp.getFileById(ssheet.getId()).makeCopy("Inventory."+formattedDate);
-  var nsheet = SpreadsheetApp.open(newFile);
-  nsheet.getActiveSheet().clear();
+  var newName = "Inventory."+formattedDate;
+  var newFile = DriveApp.getFileById(ssheet.getId()).makeCopy(newName);
+  var nssheet = SpreadsheetApp.open(newFile);
+  var nsheet = nssheet.getActiveSheet();
+  nsheet.getRange(START,1,nsheet.getLastRow()-START+1,COL_MAX).clearContent();
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert('New Inventory Sheet Created', "Look for "+newName+" in Google Drive.\n\nDon't forget to Initialize and Authorize the new Spreadsheet the first time you use it!", ui.ButtonSet.OK); 
 }
 
 //This function is triggered after any cell is edited
