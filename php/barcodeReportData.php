@@ -28,7 +28,8 @@ Retrieve inventory data from Sierra by barcode.
       "is_suppressed": "bib is suppressed in Sierra",
       "record_num":    "Sierra record number",
       "status":        "Summary status for the item based on local implementation rules",
-      "status_msg":     "Detailed message explaining the status field"
+      "status_msg":    "Detailed message explaining the status field",
+      "timestamp":     "Time scan was performed"
     }
 
 
@@ -52,13 +53,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 See http://techdocs.iii.com/sierradna/
 
 */
-//The following path may need to be localized to your instance
 include 'Sierra.php';
 
 $SIERRA = new Sierra();
 
 $barcode = isset($_GET["barcode"]) ? $_GET["barcode"] : "";
-$barcode = isset($_GET["sheetrow"]) ? $_GET["sheetrow"] : "";
+$sheetrow = isset($_GET["sheetrow"]) ? $_GET["sheetrow"] : "";
 
 if ($barcode != "") {
   echo json_encode(showReport($SIERRA, $barcode, $sheetrow));  
@@ -66,6 +66,7 @@ if ($barcode != "") {
   $search = file_get_contents('php://input');
   if ($search == null || $search == "") {
     echo json_encode(array("status" => "no input"));
+    return;
   }
   $reqs = json_decode($search);
   $result = array();
@@ -92,7 +93,8 @@ select
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag = '099' and record_type_code='i' and field_type_code='c' limit 1) as f099,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag is null and record_type_code='i' and field_type_code='c' and tag is null limit 1) as varc,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag is null and record_type_code='i' and field_type_code='c' and tag = 'b' limit 1) as varcb,
-  bv.title
+  bv.title,
+  now()
 from 
   sierra_view.phrase_entry pe 
 inner join
@@ -148,6 +150,7 @@ HERE2;
         $varcb    = $row[12];
 
         $title    = $row[13];
+        $timest   = $row[14];
 
  	    $call_number = "-";
  	    if ($f090a != "" && $f090b != "") {
@@ -197,6 +200,7 @@ HERE2;
  	      "is_suppressed"    => $supp,
  	      "call_number"      => $call_number,
 	      "title"            => $title,
+	      "timestamp"        => $timest,
   	      "status"           => $status,  
   	      "status_msg"       => $status_msg,
  	    );

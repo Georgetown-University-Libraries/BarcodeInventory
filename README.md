@@ -1,12 +1,34 @@
 # BarcodeInventory
-Support barcode scanning inventory process using data from Sierra
+Support barcode scanning inventory process using data from Sierra.
+
+Results are exported to Google Sheets using a service provided in the following project: https://github.com/Georgetown-University-Libraries/PlainTextCSV_GoogleAppsScript
 
 ## Demonstration Video
+This video demonstrates a barcode scanning inventory workflow developed by the Georgetown University Library.  
+
+Demonstration Video TBD
+
+## Description
+* Access Services student works will scan a shelf of books into a web page.
+* The response from the PHP Service returns a status: PASS, FAIL, PULL that indicates the action the student worker will take with the item that was scanned.
+* Student validates the Call Number, Title, and Volume on the book.  The student marks items with incorrect information.
+* Items in error are pulled from shelves
+* Scanning results are exported to Google Sheets.  Corrections are made into Sierra using these results.
+* The table is cleared an a new scanning session is started. 
+
+![](barcode2.jpg)
+
+# BarcodeInventory (Google Sheets Version)
+Support barcode inventory scanning into Google Sheets process using data from Sierra.
+
+_This version of the process was abandoned due to poor performance._
+
+## Demonstration Video (Google Sheets Version)
 This video demonstrates a barcode scanning inventory workflow developed by the Georgetown University Library using Google Sheets.
 
 [![Demonstration Video](https://i.ytimg.com/vi/YiTGvnMrXX8/hqdefault.jpg)](https://youtu.be/YiTGvnMrXX8)
 
-## Description
+## Description (Google Sheets Version)
 * Access Services student works will scan a shelf of books in order into a Google Sheet containing Google Apps Script code.
 * The Google Sheet has a trigger that marks the new barcode with a comment (onEdit function)
 * A trigger fires (onChange) that looks for barcodes to be validated

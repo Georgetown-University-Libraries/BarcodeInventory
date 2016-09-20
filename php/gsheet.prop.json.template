@@ -1,0 +1,4 @@
+{
+  "service": "https://script.google.com/a/macros/<your-domain>/s/<your-script-id>/exec",
+  "folderid": "<google-drive-folder-id>"
+}
