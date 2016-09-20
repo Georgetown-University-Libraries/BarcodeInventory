@@ -23,7 +23,7 @@ Support barcode inventory scanning into Google Sheets process using data from Si
 
 _This version of the process was abandoned due to poor performance._
 
-See [gs/README.md](GoogleSheets Code)
+See [GoogleSheets Code](gs/README.md)
 
 ## Credit
 This project was inspired by a project from the University of Dayton Library: https://github.com/rayvoelker/2015RoeschLibraryInventory
