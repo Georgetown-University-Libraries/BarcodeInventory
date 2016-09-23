@@ -1,11 +1,17 @@
 <?php
 /*
-User form for initiating a bulk ingest.  User must have already uploaded ingestion folders to a server-accessible folder.
+Barcode Scanning Inventory Form
+
+Dependencies
+  1. JQuery UI Dialog:https://jqueryui.com/dialog/
+  2. A web service that returns data from III Sierra DNA based on a Barcode: https://github.com/Georgetown-University-Libraries/BarcodeInventory
+  3. A Google Apps Web Service that converts CSV data into a Google Sheet: https://github.com/Georgetown-University-Libraries/PlainTextCSV_GoogleAppsScript
+
 Author: Terry Brady, Georgetown University Libraries
 
 License information is contained below.
 
-Copyright (c) 2014, Georgetown University Libraries All rights reserved.
+Copyright (c) 2016, Georgetown University Libraries All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -21,6 +27,9 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 See http://techdocs.iii.com/sierradna/
 
 */
+
+//Links to Georgetown Specific Page Headers, not essential to this code base
+//https://github.com/Georgetown-University-Libraries/batch-tools
 include '../../web/header.php';
 
 $CUSTOM = custom::instance();
@@ -39,23 +48,33 @@ $header->litPageHeader();
 ?>
 <style type="text/css">
   th.wide {width: 200px;}
-  th.action, td.action {width: 40px;}
+  th.action, td.action {width: 100px; text-align: center;}
+  th.action button, td.action button {margin: 2px;}
   #restable tr:nth-child(odd) { 
     background-color:  #EEE;  
   }
-  tr.processing td, tr.processing button, tr.processing th {
-    background-color: gray;
+  tr.current td, tr.current th {
+    font-weight: bold;
   }
-  tr.PASS td, tr.PASS button, tr.PASS th {
+  tr.processing td, tr.processing button, tr.processing th {
+    font-weight: bold;
+  }
+  tr.PASS td, tr.PASS button, tr.PASS th, #laststatus.PASS {
     background-color: white;
   }
-  tr.META td, tr.META button, tr.META th {
+  tr.META-TTL td, tr.META-TTL button, tr.META-TTL th, #laststatus.META-TTL {
     background-color: cyan;
   }
-  tr.PULL td, tr.PULL button, tr.PULL th {
+  tr.META-CALL td, tr.META-CALL button, tr.META-CALL th, #laststatus.META-CALL {
+    background-color: lightgreen;
+  }
+  tr.META-VOL td, tr.META-VOL button, tr.META-VOL th, #laststatus.META-VOL {
+    background-color: orange;
+  }
+  tr.PULL td, tr.PULL button, tr.PULL th, #laststatus.PULL {
     background-color: yellow;
   }
-  tr.FAIL td, tr.FAIL button, tr.FAIL th {
+  tr.FAIL td, tr.FAIL button, tr.FAIL th, #laststatus.FAIL {
     background-color: pink;
   }
   #gsheetdiv a {
@@ -71,15 +90,24 @@ $header->litPageHeader();
   #dialog-form {
     text-align: center;
   }
+  #message {
+    color: red;
+    font-weight: bold;
+  }
   
-  button.lastbutt:hover {
+  button.lastbutt:hover, button.lastbutt:focus {
     background-color: yellow;
   }
   button.lastbutt b {
     size: large;
   }
-
-
+  #lastbarcode,#laststatus {
+      font-weight: bold;
+  }
+  button.rescan {
+      vertical-align: bottom;
+      list-style-position: inherit;
+  }
 </style>
 <!--http://www.w3schools.com/w3css/w3css_icons.asp-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -92,28 +120,39 @@ $header->litPageHeader();
 <div id="dialog-msg"></div>
 <div id="dialog-form" title="Add Barcode">
   <fieldset>
-  <label>Last barcode scanned</label>
+  <label>Last barcode scanned:</label>
+  <span id="lastbarcode"></span>
+  <span id="laststatus"></span>
   <h2 id="bcCall">Call Number</h2>
   <h4 id="bcTitle">Title</h4>
   <h2 id="bcVol">Volume</h2>
   <div>
-    <button class="lastbutt" accesskey="c" status="META" status_msg="Bad Call Number">Bad <b>C</b>all Num</button>
-    <button class="lastbutt" accesskey="t" status="META" status_msg="Bad Title">Bad <b>T</b>itle</button>
-    <button class="lastbutt" accesskey="v" status="META" status_msg="Bad Volume">Bad <b>V</b>olume</button>
-    <button class="lastbutt reset" accesskey="r" id="lbreset" status="" status_msg=""><b>R</b>eset</button>
+    <button class="lastbutt" accesskey="c" status="META-CALL" status_msg="Bad Call Number">Bad <b>C</b>all Num</button>
+    <button class="lastbutt" accesskey="t" status="META-TTL" status_msg="Bad Title">Bad <b>T</b>itle</button>
+    <button class="lastbutt" accesskey="v" status="META-VOL" status_msg="Bad Volume">Bad <b>V</b>olume</button>
+    <button class="rescan"><i class='material-icons'>refresh</i></button>
   </div>
   </fieldset>
   <hr/>
-  <p class="validateTips" id="message">Enter the next barcode.</p>
+  <p class="validateTips" id="message">Scan the next barcode.</p>
   <form>
     <fieldset>
       <label for="name">Barcode</label>
       <input type="text" name="barcode" id="barcode" value="" class="text ui-widget-content ui-corner-all">
+      <button id="doBulk" title="Bulk Add Barcodes by Copy/Paste" type="button">...</button>
  
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
   </form>
+</div>
+<div id="dialog-bulk" title="Bulk Add Barcodes">
+  <fieldset>
+  <form>
+    <div><label for="name">Barcode List</label></div>
+    <textarea name="barcodes" id="barcodes" rows="10" cols="16"></textarea>
+  </form>
+  </fieldset>
 </div>
 
 <div id="main">
