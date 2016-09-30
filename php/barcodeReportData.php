@@ -113,7 +113,7 @@ where
   pe.index_tag || pe.index_entry = :barcode
 HERE2;
 	$arg = array(":barcode" => 'b' . $barcode);
-	$resdata = array("barcode" => $barcode, "status_msg" => " ** Barcode Not Found", "status" => "PULL");
+	$resdata = array("barcode" => $barcode, "status_msg" => " ** Barcode Not Found", "status" => "NOT-FOUND");
 
 	$dbh = $SIERRA->getPdoDb();
 	if ($dbh == null) {
@@ -168,23 +168,23 @@ HERE2;
         }
         
         if ($loc != "stx" && $loc != "stxpj" && $loc != "stxpl" && $loc != "ncstx" && $loc != "rf1st") {
-          $status = "PULL"; //PASS, PULL, FAIL, NA
+          $status = ($status == "PASS") ? "PULL-LOC" : "PULL-MULT";
           $status_msg .= "Location is not stx, stxpj, stxpl, ncstx, or rf1st. ";             
         }
          if ($statcode != "-") {
-          $status = "PULL"; //PASS, PULL, FAIL, NA
+          $status = ($status == "PASS") ? "PULL-STAT" : "PULL-MULT";
           $status_msg .= "Status Code is not '-'. ";             
         }
         if ($due != "") {
-          $status = "PULL"; //PASS, PULL, FAIL, NA
+          $status = ($status == "PASS") ? "PULL-DUE" : "PULL-MULT";
           $status_msg .= "Item has a due date. ";             
         }
         if ($icode2 == "n") {
-          $status = "PULL"; //PASS, PULL, FAIL, NA
+          $status = ($status == "PASS") ? "PULL-ICODE" : "PULL-MULT";
           $status_msg .= "Icode2 is 'n'. ";             
         }
         if ($supp != false) {
-          $status = "PULL"; //PASS, PULL, FAIL, NA
+          $status = ($status == "PASS") ? "PULL-SUPP" : "PULL-MULT";
           $status_msg .= "Bib Suppress is true. ";             
         }
         

@@ -33,6 +33,8 @@ var gsheet = new GSheet("gsheet.prop.json");
 var dialog;
 //Bulk ingest dialog box
 var dialogBulk;
+//Legend dialog
+var dialogLegend;
 
 //Test barcode ids loaded by URL parameter for demonstration purposes
 var testArr = [];
@@ -40,25 +42,50 @@ var testArr = [];
 //Global counter to assign a unique id to every scan performed within a session
 var sr=1;
 
-/* 
- * Status values that will be assigned to every scanned item
- * CSS should be defined to color code each unique status
- *  
- *  tr.PASS td, tr.PASS button, tr.PASS th, #laststatus.PASS {
- *    background-color: white;
- *  }
- * 
- *  tr.FAIL td, tr.FAIL button, tr.FAIL th, #laststatus.FAIL {
- *    background-color: pink;
- *  }
- */  
+//Other colors Anna has: kelly green, grey, goldenrod
 
-var STATUSES = ["PULL","PASS","FAIL","META-TTL","META-VOL","META-CALL"];
+var STAT_FAIL = "FAIL";
+var COLORMAP = [
+  {status: "PASS",       color: "white",        nickname: "white",           desc: "Information is valid.  No action required."},
+  {status: STAT_FAIL,    color: "pink",         nickname: "pink",            desc: "Retrieval failed.  Try to refresh again.  File a ticket with LIT if the issue persists."},
+  {status: "NOT-FOUND",  color: "coral",        nickname: "red",             desc: "No Sierra data for barcode.  Attach flag and pull item."},
+  {status: "META-CALL",  color: "darkorange",   nickname: "electric orage",  desc: "Bad Call Number.  Attach flag and send to Metadata Services for correction."},
+  {status: "META-TTL",   color: "lightskyblue", nickname: "blue",            desc: "Bad Title.  Attach flag and send to Metadata Services for correction."},
+  {status: "META-VOL",   color: "lightgreen",   nickname: "mint green",      desc: "Bad Volume.  Attach flag and send to Metadata Services for correction."},
+  {status: "PULL-STAT",  color: "goldenrod",    nickname: "goldenrod",       desc: "Incorrect status code. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-LOC",   color: "yellow",       nickname: "yellow",          desc: "Incorrect location. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-SUPP",  color: "tan",          nickname: "tan",             desc: "Bib is marked as suppressed. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-ICODE", color: "violet",       nickname: "purple",          desc: "ICode is incorrect. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-DUE",   color: "chartreuse",   nickname: "electric green",  desc: "Item is checked out in Sierra. Attach flag and pull item.  Send to Access Services for correction."},
+  {status: "PULL-MULT",  color: "grey",         nickname: "grey",            desc: "Multiple issues. Attach flags and pull item.  Send to Access Services for correction."},
+];
+var STATUSES = [];
+
+function colorInit() {
+  var ruletemplate = "tr.STATUS td, tr.STATUS button, tr.STATUS th, #laststatus.STATUS {background-color: COLOR;}\n";
+  var cssrules =  $("<style type='text/css'> </style>").appendTo("head");
+  var cssbuf = "";
+  var colorRow = "<tr class='STATUS'><th class='legnick'>NICK</th><td class='legstat'>STATUS</td><td class='legdesc'>DESC</td></tr>";
+  var colorTbl =  $("<table id='legend'/>").appendTo("#legend-div");
+  for(var i=0; i<COLORMAP.length; i++) {
+    var status   = COLORMAP[i].status;
+    var color    = COLORMAP[i].color;
+    var nickname = COLORMAP[i].nickname;
+    var desc     = COLORMAP[i].desc;
+    STATUSES.push(status);
+    var rule = ruletemplate.replace(/STATUS/g, status).replace(/COLOR/g, color);
+    cssbuf += rule
+    var row = colorRow.replace(/STATUS/g, status).replace(/COLOR/g, color).replace(/NICK/g, nickname).replace(/DESC/g, desc);
+    colorTbl.append($(row));
+  }  
+  cssrules.text(cssbuf);
+}
 
 /*
  * Initialize application
  */
 $(document).ready(function(){
+  colorInit();
   initDialogs();
   bindEvents();
     
@@ -117,6 +144,18 @@ function initDialogs() {
       },
       "Cancel" : function() {
         dialogBulk.dialog("close");
+      }
+    },
+  });
+
+  dialogLegend = $("#legend-div").dialog({
+    autoOpen : false,
+    height : 650,
+    width : 750,
+    modal : false,
+    buttons : {
+      "Done" : function() {
+        dialogLegend.dialog("close");
       }
     },
   });
@@ -184,6 +223,12 @@ function bindEvents() {
   $("#doBulk").on("click", function(){
     bulkDialog();
   });
+  
+  //Show the bulk barcode add dialog (copy/paste a list of barcodes)
+  $("#legend-button").on("click", function(){
+    dialogLegend.dialog( "option", "title", "Status Legend").dialog( "open" );
+  });
+    
 }
 
 /*
@@ -229,7 +274,7 @@ function restoreAutoSaveBarcodes(){
 //Get the last row that was (re)scanned
 function getCurrentRow() {
   var tr = $("tr.datarow.current");
-  if (!tr.is("tr")) {
+  if (tr.length == 0) {
     tr = $("tr.datarow:first");
     tr.addClass("current");
   }
@@ -298,7 +343,7 @@ function delrow(cell) {
 //Refresh table row
 //  tr - JQuery representation of table row containing barcode to refresh
 function refreshTableRow(tr) {
-  tr.removeClass("current");
+  $("tr.current").removeClass("current");
   tr.removeClass(STATUSES.join(" ")).addClass("new current");
   processCodes(true);
 }
@@ -447,7 +492,7 @@ function processCodes(show) {
 
   //If barcoe is invalid, mark with a status of "FAIL"
   if (!isValidBarcode(barcode)) {
-    setRowStatus(tr, "FAIL", "Invalid item barcode", show);
+    setRowStatus(tr, STAT_FAIL, "Invalid item barcode", show);
     return;
   }
     
@@ -462,7 +507,7 @@ function processCodes(show) {
     }
     setRowStatus(tr, tr.find("td.status").text(), null, show);
   }).fail(function() {
-    setRowStatus(tr, "FAIL", "Connection Error", show);
+    setRowStatus(tr, STAT_FAIL, "Connection Error", show);
   });
 }
 

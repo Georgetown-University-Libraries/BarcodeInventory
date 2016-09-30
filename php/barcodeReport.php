@@ -59,24 +59,6 @@ $header->litPageHeader();
   tr.processing td, tr.processing button, tr.processing th {
     font-weight: bold;
   }
-  tr.PASS td, tr.PASS button, tr.PASS th, #laststatus.PASS {
-    background-color: white;
-  }
-  tr.META-TTL td, tr.META-TTL button, tr.META-TTL th, #laststatus.META-TTL {
-    background-color: cyan;
-  }
-  tr.META-CALL td, tr.META-CALL button, tr.META-CALL th, #laststatus.META-CALL {
-    background-color: lightgreen;
-  }
-  tr.META-VOL td, tr.META-VOL button, tr.META-VOL th, #laststatus.META-VOL {
-    background-color: orange;
-  }
-  tr.PULL td, tr.PULL button, tr.PULL th, #laststatus.PULL {
-    background-color: yellow;
-  }
-  tr.FAIL td, tr.FAIL button, tr.FAIL th, #laststatus.FAIL {
-    background-color: pink;
-  }
   #gsheetdiv a {
     border: thin solid red;
     padding: 5px 10px;
@@ -102,11 +84,24 @@ $header->litPageHeader();
     size: large;
   }
   #lastbarcode,#laststatus {
-      font-weight: bold;
+    font-weight: bold;
   }
   button.rescan {
-      vertical-align: bottom;
-      list-style-position: inherit;
+    vertical-align: bottom;
+    list-style-position: inherit;
+  }
+  #legend {
+    width: 100%;
+  }
+  
+  #legend .legnick, #legend .legstat, #legend .legdesc {
+    font-size: small;
+  }
+  #legend .legnick, #legend .legstat {
+  	width: 10%;
+  }
+  #legend .legdesc {
+  	width: 80%;
   }
 </style>
 <!--http://www.w3schools.com/w3css/w3css_icons.asp-->
@@ -118,6 +113,7 @@ $header->litPageHeader();
 <?php $header->litHeaderAuth(array(), $CUSTOM->testUserInGroup(customGU::BARCODE) || $CUSTOM->isUserViewer());?>
 <input id="test" type="hidden" value="<?php echo util::getArg('test','')?>"/>
 <div id="dialog-msg"></div>
+<div id="legend-div"></div>
 <div id="dialog-form" title="Add Barcode">
   <fieldset>
   <label>Last barcode scanned:</label>
@@ -157,6 +153,7 @@ $header->litPageHeader();
 
 <div id="main">
   <span id='gsheetdiv'>
+    <a id='legend-button' href="#">Legend</a>
     <a id="addb" href="#">Add Barcode</a>
     <a id="exportGsheet" href="#">End Session - Export to Google Sheet</a>
   </span>
