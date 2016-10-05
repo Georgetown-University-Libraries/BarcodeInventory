@@ -112,6 +112,8 @@ $header->litPageHeader();
 <body>
 <?php $header->litHeaderAuth(array(), $CUSTOM->testUserInGroup(customGU::BARCODE) || $CUSTOM->isUserViewer());?>
 <input id="test" type="hidden" value="<?php echo util::getArg('test','')?>"/>
+<input id="mode" type="hidden" value="<?php echo $CUSTOM->getMode()?>"/>
+<input id="user" type="hidden" value="<?php echo $CUSTOM->getCurrentUser()?>"/>
 <div id="dialog-msg"></div>
 <div id="legend-div"></div>
 <div id="dialog-form" title="Add Barcode">

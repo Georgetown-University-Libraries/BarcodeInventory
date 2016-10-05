@@ -171,14 +171,24 @@ HERE2;
           $status = ($status == "PASS") ? "PULL-LOC" : "PULL-MULT";
           $status_msg .= "Location is not stx, stxpj, stxpl, ncstx, or rf1st. ";             
         }
-         if ($statcode != "-") {
-          $status = ($status == "PASS") ? "PULL-STAT" : "PULL-MULT";
-          $status_msg .= "Status Code is not '-'. ";             
+
+        if ($loc == "ncstx" || $loc == "rf1st") {
+          if ($statcode != "-" && $statcode != "o") {
+            $status = ($status == "PASS") ? "PULL-STAT" : "PULL-MULT";
+            $status_msg .= "Loc ncstx/rf1st and Status Code is not '-' or 'o'. ";             
+          }                  
+        } else {
+          if ($statcode != "-") {
+            $status = ($status == "PASS") ? "PULL-STAT" : "PULL-MULT";
+            $status_msg .= "Status Code is not '-'. ";             
+          }      
         }
+
         if ($due != "") {
           $status = ($status == "PASS") ? "PULL-DUE" : "PULL-MULT";
           $status_msg .= "Item has a due date. ";             
         }
+
         if ($icode2 == "n") {
           $status = ($status == "PASS") ? "PULL-ICODE" : "PULL-MULT";
           $status_msg .= "Icode2 is 'n'. ";             
