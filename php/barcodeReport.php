@@ -103,11 +103,26 @@ $header->litPageHeader();
   #legend .legdesc {
   	width: 80%;
   }
+  
+  th.lcsort, td.lcsort {
+  	width: 100px;
+  	word-break: break-all;
+  	font-size: xx-small;
+  }
+  
+  td.lcequal {
+    color: blue;
+  }
+  td.lcprev {
+    color: red;
+  }
+  
 </style>
 <!--http://www.w3schools.com/w3css/w3css_icons.asp-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript" src="../../web/gsheet.js"></script>
 <script type="text/javascript" src="barcode.js"></script>
+<script type="text/javascript" src="locCallClass.js"></script>
 </head>
 <body>
 <?php $header->litHeaderAuth(array(), $CUSTOM->testUserInGroup(customGU::BARCODE) || $CUSTOM->isUserViewer());?>

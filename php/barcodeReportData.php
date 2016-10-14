@@ -90,6 +90,7 @@ select
   br.is_suppressed as bib_suppress,  
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag = '090' and record_type_code='i' and field_type_code='c' and tag='a' limit 1) as f090a,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag = '090' and record_type_code='i' and field_type_code='c' and tag='b' limit 1) as f090b,
+  (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag = '090' and record_type_code='i' and field_type_code='c' and tag is null limit 1) as f090,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag = '099' and record_type_code='i' and field_type_code='c' limit 1) as f099,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag is null and record_type_code='i' and field_type_code='c' and tag is null limit 1) as varc,
   (select content from sierra_view.subfield_view where record_id=iv.id and marc_tag is null and record_type_code='i' and field_type_code='c' and tag = 'b' limit 1) as varcb,
@@ -145,20 +146,21 @@ HERE2;
         
         $f090a    = $row[8];
         $f090b    = $row[9];
-        $f099     = $row[10];
-        $varc     = $row[11];
-        $varcb    = $row[12];
+        $f090     = $row[10];
+        $f099     = $row[11];  // Per https://issuetrack.library.georgetown.edu/browse/HELP-12826, this will be ignored
+        $varc     = $row[12];
+        $varcb    = $row[13];
 
-        $title    = $row[13];
-        $timest   = $row[14];
+        $title    = $row[14];
+        $timest   = $row[15];
 
  	    $call_number = "-";
  	    if ($f090a != "" && $f090b != "") {
  	        $call_number = $f090a . " " . $f090b;
  	    } else if ($f090a != "" && $f090a != null) {
  	        $call_number = $f090a;
- 	    } else if ($f099 != "" && $f099 != null) {
- 	        $call_number = $f099;
+ 	    } else if ($f090 != "") {
+ 	        $call_number = $f090;
  	    } else if ($varc != "" && $varc != null && $varcb != "" && $varcb != null) {
  	        $call_number = $varc . $varcb;
  	    } else if ($varc != "" && $varc != null) {

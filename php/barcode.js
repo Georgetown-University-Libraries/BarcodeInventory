@@ -7,6 +7,10 @@ Dependencies
   1. JQuery UI Dialog:https://jqueryui.com/dialog/
   2. A web service that returns data from III Sierra DNA based on a Barcode: https://github.com/Georgetown-University-Libraries/BarcodeInventory
   3. A Google Apps Web Service that converts CSV data into a Google Sheet: https://github.com/Georgetown-University-Libraries/PlainTextCSV_GoogleAppsScript
+  
+Credits
+  This code uses a LC Call Number Sort module developed by Ray Voelker from the University of Dayton Library
+  https://github.com/rayvoelker/js-loc-callnumbers
 
 License information is contained below.
 
@@ -347,7 +351,12 @@ function makeSpreadsheetName() {
 //Delete row function 
 //  cell - delete button triggering this action
 function delrow(cell) {
-  $(cell).parents("tr").remove();
+  var tr = $(cell).parents("tr");
+  var prevtr = tr.prev("tr.datarow");
+  tr.remove();
+  if (prevtr.is("tr")) {
+    setLcSortStat(prevtr);        
+  }
   autosave();
 }
 
@@ -447,6 +456,7 @@ function restoreRow(rowarr) {
     tr.append($("<td class='timestamp'>" + rowarr.shift() + "</td>"));
     tr.addClass(tr.find("td.status").text());
     $("#restable tr.header").after(tr);
+    setLcSortStat(tr);    
     autosave()
 }
 
@@ -516,11 +526,48 @@ function processCodes(show) {
       var val = data[key] == null ? "" : data[key];
       tr.find("td."+key).text(val);
     }
+
+    setLcSortStat(tr);
+    
     setRowStatus(tr, tr.find("td.status").text(), null, show);
   }).fail(function() {
     setRowStatus(tr, STAT_FAIL, "Connection Error", show);
   });
 }
+
+/*
+ * Evaluate the call number sort of an item based on the previous row that had been added to this table.
+ * A CSS class will be assigned to the call number based on a comparison with the prior row.
+ * 
+ * Params
+ *   tr - the table row to be evaluated
+ *   
+ * CSS Classes
+ *   .lcfirst - no prior element exists in the table
+ *   .lcequal - sorted call number matches the prior row
+ *   .lcprev  - sorted call number precedes prior row (error condition)
+ *   .lcnext  - sorted call number follows prior row (expected condition)
+ */
+function setLcSortStat(tr) {
+  var tdcall = tr.find("td.call_number");
+  tdcall.removeClass("lcfirst lcequal lcnext lcprev");
+  var call_number = tdcall.text();
+  var lcsorter = new locCallClass();
+  var normlc = lcsorter.returnNormLcCall(call_number);  
+  tdcall.attr("title", normlc);
+
+  var prev = tr.next("tr").find("td.call_number").attr("title");
+  if (prev == null || prev == "") {
+    tdcall.addClass("lcfirst");
+  } else if (normlc == prev) {
+    tdcall.addClass("lcequal");
+  } else if (normlc > prev) {
+    tdcall.addClass("lcnext");
+  } else {
+    tdcall.addClass("lcprev");      
+  }
+}
+
 
 //Check barcode validity - based on institutional barcode use
 function isValidBarcode(barcode) {
