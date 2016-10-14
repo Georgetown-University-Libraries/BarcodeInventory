@@ -28,5 +28,8 @@ See [GoogleSheets Code](gs/README.md)
 ## Credit
 This project was inspired by a project from the University of Dayton Library: https://github.com/rayvoelker/2015RoeschLibraryInventory
 
+This code uses a LC Call Number Sort module developed by Ray Voelker from the University of Dayton Library: https://github.com/rayvoelker/js-loc-callnumbers
+
+
 ***
 [![Georgetown University Library IT Code Repositories](https://raw.githubusercontent.com/Georgetown-University-Libraries/georgetown-university-libraries.github.io/master/LIT-logo-small.png)Georgetown University Library IT Code Repositories](http://georgetown-university-libraries.github.io/)
