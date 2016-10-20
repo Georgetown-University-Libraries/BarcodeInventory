@@ -553,7 +553,11 @@ function setLcSortStat(tr) {
   tdcall.removeClass("lcfirst lcequal lcnext lcprev");
   var call_number = tdcall.text();
   var lcsorter = new locCallClass();
-  var normlc = lcsorter.returnNormLcCall(call_number);  
+  var normlc = "";
+  try {
+    normlc = lcsorter.returnNormLcCall(call_number);
+  } catch(e) {
+  }
   tdcall.attr("title", normlc);
 
   var prev = tr.next("tr").find("td.call_number").attr("title");
