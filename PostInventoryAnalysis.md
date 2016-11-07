@@ -28,4 +28,8 @@ data and to facilitate the creation of Sierra Create List files.
 ![](gs-addon/screen6.jpg)
 
 ### Use Google Sheet Filters to Resolve Duplicates
+Select all cells and then turn on Filters.
 ![](gs-addon/screen7.jpg)
+
+Filter for duplicate values and remove unwanted rows.
+![](gs-addon/screen8.jpg)
