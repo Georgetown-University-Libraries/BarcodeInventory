@@ -5,6 +5,27 @@ data and to facilitate the creation of Sierra Create List files.
 
 [License Info](LICENSE.md)
 
-## Screen Shot - Start Analysis
+## Screen Shots
 
-!(gs-addon/screen1.jpg)
+### Start Analysis
+
+![](gs-addon/screen1.jpg)
+
+### Analysis Tab
+
+![](gs-addon/screen2.jpg)
+
+### Create a Sierra Create List Based on Status Value
+![](gs-addon/screen3.jpg)
+
+### View By Location Code
+![](gs-addon/screen4.jpg)
+
+### Trigger Duplicate Barcode Analysis
+![](gs-addon/screen5.jpg)
+
+### View Duplicates
+![](gs-addon/screen6.jpg)
+
+### Use Google Sheet Filters to Resolve Duplicates
+![](gs-addon/screen7.jpg)
