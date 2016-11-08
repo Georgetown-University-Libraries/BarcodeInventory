@@ -1,0 +1,1 @@
+[Google Sheets Add-On Description and Screenshots](../PostInventoryAnalysis.md)
