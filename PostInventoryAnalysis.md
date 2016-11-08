@@ -5,12 +5,14 @@ data and to facilitate the creation of Sierra Create List files.
 
 [License Info](LICENSE.md)
 
-## Installation
+## Installation of Add On
 ![Add On Menu](gs-addon/install1.jpg)
 
 ![Find Georgetown Extensions](gs-addon/install2.jpg)
 
 ![Install Add On](gs-addon/install3.jpg)
+
+![Authorize Add On](gs-addon/install4.jpg)
 
 ## Screen Shots
 
