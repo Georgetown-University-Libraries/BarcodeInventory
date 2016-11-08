@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+
+    <style>
+    .branding-below {
+      bottom: 56px;
+      top: 0;
+    }
+
+    .branding-text {
+      left: 7px;
+      position: relative;
+      top: 3px;
+    }
+
+    .col-contain {
+      overflow: hidden;
+    }
+
+    .col-one {
+      float: left;
+      width: 50%;
+    }
+
+    .logo {
+      vertical-align: middle;
+    }
+
+    .radio-spacer {
+      height: 20px;
+    }
+
+    .width-100 {
+      width: 100%;
+    }
+    
+    .count, .dup {
+      text-align: right;
+    }
+    
+    table {
+      margin-collapse: collapsed;
+      width: 100%;
+      border: solid thin black;
+    }
+    
+    td, th {
+      border: solid thin black;
+      padding: 2px;
+    }
+    
+    label.rpt {
+      font-weight: bold;
+    }    
+    
+    div.rpt {
+      margin-top: 12px;
+    }
+    
+    textarea:disabled {
+      background-color: #EEEEEE;
+    }
+    
+    tr.header th {
+      background-color: yellow;
+    }
+    
+    .ui-accordion .ui-accordion-content {
+      padding: .25em .25em !important;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar branding-below">
+        <div id ="tables" class="block col-contain">
+        <h4>Status Analysis</h4>
+        <table>
+          <tr class="header">
+            <th>Status</th>
+            <th>Count</th>
+          </tr>
+          <?for (var i=0; i<statdata.length; i++) {
+            var k = statdata[i].key;
+            var v = statdata[i].count;
+          ?>
+          <tr>
+            <th><?=k?></th>
+            <td class='count'><button type='button' data='Status' class='count' value='<?=k?>'><?=v?></button></td>
+          </tr>
+          <?}?>
+        </table>  
+        <h4>Location Analysis</h4>
+        <table>
+          <tr class="header">
+            <th>Location</th>
+            <th>Count</th>
+          </tr>
+          <?for (var i=0; i<locdata.length; i++) {
+            var k = locdata[i].key;
+            var v = locdata[i].count;
+          ?>
+          <tr>
+            <th><?=k?></th>
+            <td class='count'><button type='button' data='Location Code' class='count' value='<?=k?>'><?=v?></button></td>
+          </tr>
+          <?}?>
+        </table>  
+        <h4>Duplicate Analysis</h4>
+        <table>
+          <tr class="header">
+            <th>Uniqueness</th>
+            <th>Count</th>
+          </tr>
+          <?for (var i=0; i<dupdata.length; i++) {
+            var k = dupdata[i].key;
+            var v = dupdata[i].count;
+          ?>
+          <tr>
+            <th><?=k?></th>
+            <td class='count'><?=v?></td>
+          </tr>
+          <?}?>
+        </table>  
+      </div>
+      <div class="rpt">
+      <fieldset>
+        <legend>Click the buttons above to create the text for a Sierra Create List</legend>
+        <textarea id="foo" cols="30" rows="10" disable="Y"></textarea>
+      </fieldset>
+      </div>
+    </div>
+
+    <div class="sidebar bottom">
+      <img alt="Add-on logo" class="logo" src="https://github.com/Georgetown-University-Libraries/georgetown-university-libraries.github.io/raw/master/LIT-logo-small.png">
+      <span class="gray branding-text">Inventory Tools <br/>by <a href="http://library.georgetown.edu/lit">Georgetown University Library IT</a></span>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+      /**
+       * On document load, assign click handlers to each button and try to load the
+       * user's origin and destination language preferences if previously set.
+       */
+      $(function() {
+        $('button.count').on("click",function(){
+          var val = $(this).val();
+          var col = $(this).attr("data");
+          $("#foo").val("Loading values for " + val + "...");
+          $("#foo").attr("disabled",true);
+          google.script.run.withSuccessHandler(showValues).getRecnumValues(col, val);
+        });
+        $('button.dup').on("click",function(){
+          var val = $(this).val();
+          google.script.run.showHideDups(val == "Duplicate");
+        });
+        $("#tables").accordion({heightStyle: "content", animate: false});
+      });
+
+      function showValues(data) {
+        $("#foo").val(data).attr("disabled",false).select();
+      }
+    </script>
+  </body>
+</html>
+
