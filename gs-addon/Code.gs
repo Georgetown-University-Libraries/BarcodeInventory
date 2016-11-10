@@ -74,16 +74,20 @@ function getCol(colname) {
 }
 
 
-function getColRange(col) {
+function getColRange(colname) {
   var sheet = SpreadsheetApp.getActiveSheet();
-  return sheet.getRange(COUNT_HEADROW+1, getCol(col), sheet.getLastRow()-COUNT_HEADROW);
+  if (getCol(colname) == 0) {
+    return null;
+  }
+  return sheet.getRange(COUNT_HEADROW+1, getCol(colname), sheet.getLastRow()-COUNT_HEADROW);
 }
 
-function getColVals(col) {
-  if (col == 0) {
+function getColVals(colname) {
+  var range = getColRange(colname);
+  if (range == null) {
     return [];
   }
-  return getColRange(col).getValues();
+  return range.getValues();
 }
 
 function getData(col) {
