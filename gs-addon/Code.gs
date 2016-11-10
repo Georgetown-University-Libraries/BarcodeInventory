@@ -24,17 +24,12 @@ var COL_DUP     = "Duplicate";
  *     determine which authorization mode (ScriptApp.AuthMode) the trigger is
  *     running in, inspect e.authMode.
  */
-function onOpen(e) {
-  var ssheet = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = SpreadsheetApp.getActiveSheet();
-  if (getCol(COL_DUP) == 0) {
-    sheet.insertColumnAfter(2);
-    sheet.getRange(1, 3).setValue(COL_DUP);
-  }
-  var menu = SpreadsheetApp.getUi().createAddonMenu();
-  menu.addItem("Analyze Inventory Stats", "showSidebar");
-  menu.addItem("Mark Duplicates", "markDups");
-  menu.addToUi();
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createAddonMenu()
+    .addItem("Analyze Inventory Stats", "showSidebar")
+    .addItem("Mark Duplicates", "markDups")
+    .addToUi();
 }
 
 /**
@@ -85,6 +80,9 @@ function getColRange(col) {
 }
 
 function getColVals(col) {
+  if (col == 0) {
+    return [];
+  }
   return getColRange(col).getValues();
 }
 
@@ -137,6 +135,10 @@ function getRecnumValues(col, key) {
 
 function markDups() {
   var sheet = SpreadsheetApp.getActiveSheet();
+  if (getCol(COL_DUP) == 0) {
+    sheet.insertColumnAfter(2);
+    sheet.getRange(1, 3).setValue(COL_DUP);
+  }
   var dupcol = getCol(COL_DUP);
   var dupdata = [];
   var barcol    = getColVals(COL_BARCODE);
