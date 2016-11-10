@@ -25,12 +25,6 @@ var COL_DUP     = "Duplicate";
  *     running in, inspect e.authMode.
  */
 function onOpen(e) {
-  ShreadsheetApp.getUi().createAddonMenu()
-      .addItem('Start', 'showSidebar')
-      .addToUi();
-}
-
-function onOpen(e) {
   var ssheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = SpreadsheetApp.getActiveSheet();
   if (getCol(COL_DUP) == 0) {
