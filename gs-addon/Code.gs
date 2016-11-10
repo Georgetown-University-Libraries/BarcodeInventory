@@ -31,10 +31,10 @@ function onOpen(e) {
     sheet.insertColumnAfter(2);
     sheet.getRange(1, 3).setValue(COL_DUP);
   }
-  var menus = [];
-  menus.push({name: "Analyze Inventory Stats", functionName: "showSidebar"});
-  menus.push({name: "Mark Duplicates", functionName: "markDups"});
-  ssheet.addMenu("LIT Tools", menus);
+  var menu = SpreadsheetApp.getUi().createAddonMenu();
+  menu.addItem("Analyze Inventory Stats", "showSidebar");
+  menu.addItem("Mark Duplicates", "markDups");
+  menu.addToUi();
 }
 
 /**
