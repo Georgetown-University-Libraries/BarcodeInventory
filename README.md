@@ -11,6 +11,7 @@ This video demonstrates a barcode scanning inventory workflow developed by the G
 ## Description
 * Access Services student works will scan a shelf of books into a web page.
 * The response from the PHP Service returns a status: PASS, FAIL, PULL that indicates the action the student worker will take with the item that was scanned.
+* The call number of the scanned item is compared to the previously scanned item.  Items out of sort order will be color coded.
 * Student validates the Call Number, Title, and Volume on the book.  The student marks items with incorrect information.
 * Items in error are pulled from shelves
 * Scanning results are exported to Google Sheets.  Corrections are made into Sierra using these results.
