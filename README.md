@@ -6,7 +6,7 @@ Results are exported to Google Sheets using a service provided in the following 
 ## Demonstration Video
 This video demonstrates a barcode scanning inventory workflow developed by the Georgetown University Library.  
 
-[![Demonstration Video](https://i.ytimg.com/vi/o_tthuoCVMk/hqdefault.jpg)](https://www.youtube.com/watch?v=5X_QiX-E7aI)
+[![Demonstration Video](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://www.youtube.com/watch?v=5X_QiX-E7aI)
 
 ## Description
 * Access Services student works will scan a shelf of books into a web page.
