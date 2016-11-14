@@ -21,7 +21,7 @@ This video demonstrates a barcode scanning inventory workflow developed by the G
 
 ## BarcodeInventory Analysis Using Google Sheets
 
-A Google Sheet Add-On has been developed to process the results of this inventory process.  That process is described [here](PostInventoryAnalysis.md).
+A Google Sheet Add-On has been developed to process the results of this inventory process.  That process is described in [Post Inventory Analysis - Google Sheets Add-On](PostInventoryAnalysis.md).
 
 ## Scanning Tool Using Google Sheets (Oboslete Code)
 Intially, the barcode inventory tool was develoepd to run inside Google Sheets. This version of the process was abandoned due to poor performance.  The Code is available here: [GoogleSheets Code](gs/README.md)
