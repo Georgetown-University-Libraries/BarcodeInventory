@@ -8,6 +8,10 @@ data and to facilitate the creation of Sierra Create List files.
 ## Installation of Add On
 This add-on was built to support an inventory project at the Georgetown University Library.  The Add-On is available [here](https://chrome.google.com/webstore/detail/georgetown-library-invent/allalkpfmgndcgokflbmegganieinclk?utm_source=permalink).  It is unlikely to be useful outside of the context of this project.
 
+- The process of publishing an add-on is described [here](https://developers.google.com/apps-script/add-ons/domain-wide).
+  - Deploy as Sheets add-on (from Google Sheets)
+  - Edit in Chrome Web Store (from deploy dialog)
+
 ### Select Add-On Menu
 ![Add On Menu](gs-addon/screenshots/install1.jpg)
 
