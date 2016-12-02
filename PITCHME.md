@@ -23,5 +23,5 @@
 ![Action Legend with the Tool](presentation-files/legend.jpg)
 
 #HSLIDE
-![Video](https://www.youtube.com/embed/5X_QiX-E7aI?start=121)
+![Video](https://www.youtube.com/embed/5X_QiX-E7aI?start=2m)
 
