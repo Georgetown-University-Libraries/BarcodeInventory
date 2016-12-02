@@ -21,9 +21,11 @@
 #HSLIDE?image=presentation-files/legend.jpg
 # Action Legend
 
-#HSLIDE?video=https://www.youtube.com/embed/5X_QiX-E7aI
+#HSLIDE
+![Video](https://www.youtube.com/watch?v=5X_QiX-E7aI&feature=youtu.be&t=122)
 
 #HSLIDE
 ![Video](https://www.youtube.com/embed/5X_QiX-E7aI?t=121)
+
 
 #HSLIDE?video=https://www.youtube.com/embed/5X_QiX-E7aI?t=121
