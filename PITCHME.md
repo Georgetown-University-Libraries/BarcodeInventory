@@ -71,5 +71,5 @@
 
 #HSLIDE
 # Demonstration
-- [Video](https://youtu.be/5X_QiX-E7aI?t=121)
+- [![Demonstration Video](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121){:target="_blank"}
 
