@@ -25,40 +25,41 @@
 #HSLIDE
 ### Step 1: Scanning
 - Student Worker Opens Barcode Scanning Tool (PHP and JavaScript)
-- Student Worker Scans Books with a Barcode Scanner
+- Scans Book with a Barcode Scanner
  - Barcode Is Sent to a Web Service (AJAX)
  - Barcode Lookup Occurs in ILS (PHP and PostgreSQL via Sierra DNA)
  - Catalog Data Is Returned 
-- Web Page Refreshes with Catalog Data for the Last Item Scanned
+- Catalog Data Added to Inventory Table
  - Title, Call Number and Volume Display in Large Text
 
 #HSLIDE
 ### Step 2: Evaluate Item
-- If an error condition is retuned (item has due date, unexpected location, etc)
- - Item is pulled from shelf and a color coded note is added to the item
- - Item will be sent to Access Services to Resolve
-- Student worker manually compares the Title, Call Number and Volume
- - Student worker clicks a button to set an error condition
- - Item is pulled from the shelf and a color coded note is added to the item
- - Item will be sent to Metadata Servies to Resolve
+#### Status Error? (item has due date, unexpected location, etc)
+- Pull Item, Add Color Coded Status Note
+- Send to Access Services
+#### Title, Call Number or Volume Error
+- Student worker clicks a button to set an error condition
+- Item is pulled from the shelf and a color coded note is added to the item
+- Item will be sent to Metadata Servies to Resolve
 
 #HSLIDE
 ### Step 3: Evaluate Item Shelf Sequence
-- The Call Number of each item is normalized
- - Our ILS should do this, but it is not reliable
- - We are using code from the University of Dayton to perform this step
-- The Normalized call number is compared with the previously scanned item
-- Items that appear out of sequence with the prior item are color coded
-- Student worker will re-shelf if appropriate
+- Normalize Call Number (JS function)
+ - ILS Normalization is Unreliable
+- Compare normalized call number with prior item 
+- Sort Error?
+ - Re-shelf if appropriate
  
 #HSLIDE
 ### Step 4: Complete Scanning Session
-- Student Worker Clicks Link to Save Work 
- - A CSV representation of the inventory session is sent to a web service (AJAX)
- - The Web Service parses the CSV and creates a Google Sheet (Google App Script)
-  - A new sheet is created based on the starting and ending call numbers
-  - CSV data fields are added to the Spreadsheet with all auto-formatting disabled
-  - The link to the new spreadsheet is returned in a new tab
+- Click Link to Save Work 
+ - Send CSV representation of inventory to web service (AJAX)
+ - Parses CSV and Create a Google Sheet (Google App Script)
+  - Name file by starting and ending call numbers
+  - Create table cells
+   - Turn off auto-correct and formatting
+   - Add CSV data 
+  - Return page with a link to the new spreadsheet in a new tab
 
 #HSLIDE
 ### Step 5: Evaluation and Bulk Update
@@ -73,11 +74,12 @@
 
 #HSLIDE
 # Demonstration
-[![Demonstration Video - Starts After Overview](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121)
+[![Demonstration Video - Starts After Overview 2:00](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121)
+
 _Open this in a new tab, the slideshow tool has trouble opening this link -- or use the embedded video below_
 
 #VSLIDE
-[Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
+![Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
 
 #HSLIDE
 # Project Inspiration
