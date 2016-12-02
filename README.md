@@ -1,3 +1,5 @@
+[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/Georgetown-University-Libraries/BarcodeInventory/master?grs=github&t=white)
+
 # BarcodeInventory
 Support barcode scanning inventory process using data from Sierra.
 
