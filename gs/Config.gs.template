@@ -1,3 +1,0 @@
-//Config.gs has been explicitly added to .gitignore to not explose local customizations.
-//Add a link to a service that will be accessible to Google Servers
-var URL="https://<your-server>/barcodeApi.php";
