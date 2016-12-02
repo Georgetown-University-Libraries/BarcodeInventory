@@ -20,4 +20,4 @@
 
 #HSLIDE?image=presentation-files/legend.jpg
 
-#HSLIDE?video=https://www.youtube.com/watch?v=5X_QiX-E7aI&feature=youtu.be&t=121
+#HSLIDE?video=https://www.youtube.com/watch?v=5X_QiX-E7aI&feature=youtu.be
