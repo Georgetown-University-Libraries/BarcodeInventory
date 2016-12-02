@@ -32,6 +32,8 @@
 - Web Page Refreshes with Catalog Data for the Last Item Scanned
  - Title, Call Number and Volume Display in Large Text
 
+#HSLIDE
+### Step 2: Evaluate Item
 - If an error condition is retuned (item has due date, unexpected location, etc)
  - Item is pulled from shelf and a color coded note is added to the item
  - Item will be sent to Access Services to Resolve
