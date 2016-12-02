@@ -114,3 +114,7 @@ _Open this in a new tab, the slideshow tool has trouble opening this link -- or 
 - Great Collaboration
 - Great Learning
 - Will Re-use Many Components in the Future
+- Code is on GitHub
+ - PHP Barcode Lookup
+ - HTML & Client JavaScript
+ - Google Apps Add-On
