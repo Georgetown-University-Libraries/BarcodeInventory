@@ -34,14 +34,13 @@
 
 #HSLIDE
 ### Step 2: Evaluate Item
-**Status Error?** (item has due date, unexpected location, etc)
-- Pull Item, Add Color Coded Status Note
-- Send to Access Services
-
-**Title, Call Number or Volume Error?**
-- Student worker clicks a button to set an error condition
-- Item is pulled from the shelf and a color coded note is added to the item
-- Item will be sent to Metadata Servies to Resolve
+- **Status Error?** (item has due date, unexpected location, etc)
+ - Pull Item, Add Color Coded Status Note
+ - Send to Access Services
+- **Title, Call Number or Volume Error?**
+ - Student worker clicks a button to set an error condition
+ - Item is pulled from the shelf and a color coded note is added to the item
+ - Item will be sent to Metadata Servies to Resolve
 
 #HSLIDE
 ### Step 3: Evaluate Item Shelf Sequence
@@ -54,20 +53,21 @@
 #HSLIDE
 ### Step 4: Complete Scanning Session
 - Click Link to Save Work 
- - Send CSV representation of inventory to web service (AJAX)
- - Parse CSV and Create a Google Sheet (Google App Script)
-  - Name file by starting and ending call numbers
+ - POST inventory as CSV (AJAX)
+ - Parse CSV & Create Google Sheet (Google App Script)
+  - Name using first/last call numbers
   - Create table cells
    - Turn off auto-correct and formatting
    - Add CSV data 
-  - Return page with a link to the new spreadsheet in a new tab
+  - Return spreadsheet link in a new tab
 
 #HSLIDE
 ### Step 5: Evaluation and Bulk Update
-- Library staff view a concatenated list of inventory files in Google Sheets
-- Using a Google Sheets Add-On, items can be grouped by error condition or location
-- Sierra (ILS) "Create Lists" are generated based on the grouping allowing bulk correction in the ILS
-
+- Concatentate inventories and open in Google Sheets (PHP)
+- Group items by error condition or location (Google Apps Script Add-On)
+ - Generate Sierra (ILS) "Create Lists" 
+ - Bulk Correct ILS records
+ 
 #HSLIDE
 ### Other Notes
 - The inventory session is also saved to the browser database in case the user accidentally navigates away from the page
@@ -83,26 +83,31 @@ _Open this in a new tab, the slideshow tool has trouble opening this link -- or 
 ![Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
 
 #HSLIDE
-# Project Inspiration
+### Project Inspiration
 - Project was inspired by a project at University of Dayton Library 
  - That project allowed a user to scan into Google Sheets
  - Barcode lookups were performed in batches rather than item by item
  - Used a similar query method with Sierra DNA
  
 #HSLIDE
-# Development Process
+### Development Process
 - Iterative process working with Access Services Staff
 - Google Sheets version was too slow to allow Title/Call Number/Volume Validation
 - Opportunity for experimentation
  - Call Number Sorting Added Later
  - The Google Sheets Add-On Was a Learning Opportunity
-  - Intend to Use this approach for future projects
- - Fun collaboration
   
 #HSLIDE
-# Challenges
+### Challenges
 - Did not want to re-create the ILS 
  - Data persists only in the ILS
  - Inventory files, if retained, will be managed by Access Services
 - The need to concatentate and analyze files led us to also save inventory files to a server
 - Some duplicated uploads of inventory files
+
+#HSLIDE
+### Conclusion
+- Process is underway and going well
+- Great Collaboration
+- Great Learning
+- Will Re-use Many Components in the Future
