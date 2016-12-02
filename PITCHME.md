@@ -18,14 +18,10 @@
 - Send to Metadata Services Staff for Correction
 - Send to Access Services Staff for Correction
 
-#HSLIDE?image=presentation-files/legend.jpg
-# Action Legend
-
 #HSLIDE
-![Video](https://www.youtube.com/watch?v=5X_QiX-E7aI&feature=youtu.be&t=122)
+# Action Legend
+![Action Legend with the Tool](presentation-files/legend.jpg)
 
 #HSLIDE
 ![Video](https://www.youtube.com/embed/5X_QiX-E7aI?start=121)
 
-
-#HSLIDE?video=https://www.youtube.com/embed/5X_QiX-E7aI?t=121
