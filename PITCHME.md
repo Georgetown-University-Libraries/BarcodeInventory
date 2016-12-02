@@ -34,10 +34,11 @@
 
 #HSLIDE
 ### Step 2: Evaluate Item
-*Status Error?* (item has due date, unexpected location, etc)
+**Status Error?** (item has due date, unexpected location, etc)
 - Pull Item, Add Color Coded Status Note
 - Send to Access Services
-*Title, Call Number or Volume Error?*
+
+**Title, Call Number or Volume Error?**
 - Student worker clicks a button to set an error condition
 - Item is pulled from the shelf and a color coded note is added to the item
 - Item will be sent to Metadata Servies to Resolve
