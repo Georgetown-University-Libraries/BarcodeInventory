@@ -88,6 +88,9 @@ _Open this in a new tab, the slideshow tool has trouble opening this link -- or 
  - That project allowed a user to scan into Google Sheets
  - Barcode lookups were performed in batches rather than item by item
  - Used a similar query method with Sierra DNA
+- U Dayton Shared Code
+ - Optimized Sierra DNA Query
+ - Call Number Normalization
  
 #HSLIDE
 ### Development Process
