@@ -73,8 +73,31 @@
 
 #HSLIDE
 # Demonstration
-- [![Demonstration Video - Starts After Overview](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121)
+[![Demonstration Video - Starts After Overview](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121)
+_Open this in a new tab, the slideshow tool has trouble opening this link -- or use the embedded video below_
 
 #VSLIDE
-- [Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
+[Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
 
+#HSLIDE
+# Project Inspiration
+- Project was inspired by a project at University of Dayton Library 
+ - That project allowed a user to scan into Google Sheets
+ - Barcode lookups were performed in batches rather than item by item
+ - Used a similar query method with Sierra DNA
+ 
+# Development Process
+- Iterative process working with Access Services Staff
+- Google Sheets version was too slow to allow Title/Call Number/Volume Validation
+- Opportunity for experimentation
+ - Call Number Sorting Added Later
+ - The Google Sheets Add-On Was a Learning Opportunity
+  - Intend to Use this approach for future projects
+ - Fun collaboration
+  
+# Challenges
+- Did not want to re-create the ILS 
+ - Data persists only in the ILS
+ - Inventory files, if retained, will be managed by Access Services
+- The need to concatentate and analyze files led us to also save inventory files to a server
+- Some duplicated uploads of inventory files
