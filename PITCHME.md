@@ -34,10 +34,10 @@
 
 #HSLIDE
 ### Step 2: Evaluate Item
-#### Status Error? (item has due date, unexpected location, etc)
+*Status Error?* (item has due date, unexpected location, etc)
 - Pull Item, Add Color Coded Status Note
 - Send to Access Services
-#### Title, Call Number or Volume Error
+*Title, Call Number or Volume Error?*
 - Student worker clicks a button to set an error condition
 - Item is pulled from the shelf and a color coded note is added to the item
 - Item will be sent to Metadata Servies to Resolve
@@ -54,7 +54,7 @@
 ### Step 4: Complete Scanning Session
 - Click Link to Save Work 
  - Send CSV representation of inventory to web service (AJAX)
- - Parses CSV and Create a Google Sheet (Google App Script)
+ - Parse CSV and Create a Google Sheet (Google App Script)
   - Name file by starting and ending call numbers
   - Create table cells
    - Turn off auto-correct and formatting
@@ -88,6 +88,7 @@ _Open this in a new tab, the slideshow tool has trouble opening this link -- or 
  - Barcode lookups were performed in batches rather than item by item
  - Used a similar query method with Sierra DNA
  
+#HSLIDE
 # Development Process
 - Iterative process working with Access Services Staff
 - Google Sheets version was too slow to allow Title/Call Number/Volume Validation
@@ -97,6 +98,7 @@ _Open this in a new tab, the slideshow tool has trouble opening this link -- or 
   - Intend to Use this approach for future projects
  - Fun collaboration
   
+#HSLIDE
 # Challenges
 - Did not want to re-create the ILS 
  - Data persists only in the ILS
