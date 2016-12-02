@@ -70,10 +70,6 @@
 - A bulk data entry process is allowed if scans ever take place offline
 
 #HSLIDE
-![Video](https://www.youtube.com/embed/5X_QiX-E7aI?start=2m)
+# Demonstration
+- [Video](https://youtu.be/5X_QiX-E7aI?t=121)
 
-#VSLIDE
-![Video](https://youtu.be/5X_QiX-E7aI?t=121)
-
-#VHSLIDE
-![Video](https://www.youtube.com/embed/5X_QiX-E7aI?t=121)
