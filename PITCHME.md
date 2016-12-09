@@ -4,7 +4,7 @@
 ### Terry Brady
 ### Georgetown University Library
 
-- https://github.com/terrywbrady/info
+- <a target="_blank" href="https://github.com/terrywbrady/info">https://github.com/terrywbrady/info</a>
 
 #HSLIDE
 ![Lauinger Library Stacks](presentation-files/stacks.jpg)
@@ -75,12 +75,7 @@
 
 #HSLIDE
 # Demonstration
-[![Demonstration Video - Starts After Overview 2:00](https://i.ytimg.com/vi/5X_QiX-E7aI/hqdefault.jpg)](https://youtu.be/5X_QiX-E7aI?t=121)
-
-_Open this in a new tab, the slideshow tool has trouble opening this link -- or use the embedded video below_
-
-#VSLIDE
-![Full Video](https://www.youtube.com/embed/5X_QiX-E7aI)
+![Full Video](https://www.youtube.com/embed/5X_QiX-E7aI?start=120)
 
 #HSLIDE
 ### Project Inspiration
